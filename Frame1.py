@@ -163,6 +163,7 @@ class Frame1(wx.Frame):
                     txt = open(dir + "/" + name).read()
                     txt = "<p>" + txt + "</p>"
                     txt = txt.replace("\n", "</p><p>").replace('"', '""')
+                    txt = txt.replace("<p></p>", "")
                     f.write('%s,"%s"\n'%(title, txt))
                     
                     shutil.move(dir + "/" + name, "txts/" + name)
