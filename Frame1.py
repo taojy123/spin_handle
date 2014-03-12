@@ -19,7 +19,7 @@ class Frame1(wx.Frame):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAME1, name='', parent=prnt,
               pos=wx.Point(752, 366), size=wx.Size(396, 363),
-              style=wx.DEFAULT_FRAME_STYLE, title='Frame1')
+              style=wx.DEFAULT_FRAME_STYLE, title='spin_handle')
         self.SetClientSize(wx.Size(380, 325))
         self.SetToolTipString('')
 
@@ -142,6 +142,11 @@ class Frame1(wx.Frame):
         order = self.radioButton1.GetValue()
         lnum = int(self.textCtrl1.GetValue())
         fnum = int(self.textCtrl2.GetValue())
+
+        if lnum > 10:
+            wx.MessageBox("Test version lines number will be under 10!")
+            event.Skip()
+            return
         
         titles = open(path).readlines()
         txts = os.listdir(dir)
