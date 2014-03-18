@@ -7,10 +7,10 @@ exe = EXE( pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name=os.path.join('dist', 'SpinHandle.exe'),
+          name=os.path.join('dist', 'App1.exe'),
           debug=False,
           strip=False,
           upx=True,
           console=False )
 app = BUNDLE(exe,
-             name=os.path.join('dist', 'SpinHandle.exe.app'))
+             name=os.path.join('dist', 'App1.exe.app'))

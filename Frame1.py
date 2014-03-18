@@ -119,6 +119,7 @@ class Frame1(wx.Frame):
         
         dlg = wx.DirDialog(self, 
         "Choose the directory of txts:",
+        defaultPath=os.getcwd(),
         style=wx.DD_DEFAULT_STYLE)
         if dlg.ShowModal() == wx.ID_OK:
             dir=dlg.GetPath()
@@ -143,10 +144,6 @@ class Frame1(wx.Frame):
         lnum = int(self.textCtrl1.GetValue())
         fnum = int(self.textCtrl2.GetValue())
 
-        if lnum > 10:
-            wx.MessageBox("Test version lines number will be under 10!")
-            event.Skip()
-            return
         
         titles = open(path).readlines()
         txts = os.listdir(dir)
@@ -156,11 +153,14 @@ class Frame1(wx.Frame):
                 f = open("output/"+str(i)+".csv", "w")
                 for j in range(lnum):
                     if order:
-                        title = titles[j%len(titles)].strip()
+                        title = titles[j%len(titles)]
                     else:
-                        title = random.choice(titles).strip()
+                        title = random.choice(titles)
+                    title = title.strip().replace(",",  "").replace("\xef\xbb\xbf", "")
                     name = txts.pop()
                     txt = open(dir + "/" + name).read()
+                    txt = txt.strip().replace("\r", "").replace("\xef\xbb\xbf", "")
+                    print [txt]
                     txt = "<p>" + txt + "</p>"
                     txt = txt.replace("\n", "</p><p>").replace('"', '""')
                     txt = txt.replace("<p></p>", "")
